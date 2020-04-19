@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class Student extends Component {
-    render() {
+function Student() {
+   
         return (
             <div>
-                <hi>Hi</hi>
+                <h1>Hi</h1>
             </div>
         );
-    }
+    
 }
 
 export default Student;
