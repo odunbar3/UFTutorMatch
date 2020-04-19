@@ -1,0 +1,14 @@
+.backHome {
+    color:#103681;
+    background: white;
+    text-decoration:none;
+    border:none;
+    padding: 5px 10px;
+    display: inline-block;
+    cursor:pointer;
+    margin-bottom: 50px;
+    text-align:center;
+    font-size:calc(1px + 2vmin);
+    font-weight:normal;
+    align-items:left;
+}

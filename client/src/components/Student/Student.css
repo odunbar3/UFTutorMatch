@@ -1,3 +1,43 @@
-h1 {
-    color:black;
+body {
+    margin: 0;
+}
+
+.App-header {
+    background-color: #103681;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    padding-top: 200px;
+}
+
+
+.heading {
+    color:white;
+    font-size:calc(45px + 2vmin);
+    margin-bottom:50px;
+    font-weight:normal;
+    }
+
+.heading2{
+    color:white;
+    font-size:calc(25px + 2vmin);
+    font-weight:normal;
+
+}
+
+.buttons{
+    color:#103681;
+    background: white;
+    text-decoration:none;
+    border:none;
+    padding: 15px 32px;
+    display: inline-block;
+    cursor:pointer;
+    margin-bottom: 50px;
+    text-align:center;
+    font-size:calc(25px + 2vmin);
+    font-weight:normal;
 }
