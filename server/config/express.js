@@ -4,6 +4,7 @@ const path = require('path'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     tutorsRouter = require('../routes/TutorsRouter');
+    reviewRouter = require('../routes/RatingsRouter');
 
 module.exports.init = () => {
     /* 
@@ -24,9 +25,12 @@ module.exports.init = () => {
 
     // body parsing middleware
     app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
 
     // add a router
-    app.use('/api/tutors', tutorsRouter);
+    app.use('/tutors', tutorsRouter);
+    app.use('/reviews', reviewRouter);
+    
 
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files
