@@ -1,0 +1,26 @@
+.buttons{
+    color:#103681;
+    background: white;
+    text-decoration:none;
+    border:none;
+    padding: auto;
+    display: inline-block;
+    cursor:pointer;
+    margin: calc(20px + 2vmin);
+    text-align:right;
+    font-size:calc(5px + 2vmin);
+    font-weight:normal;
+    line-height:calc(14px + 2vmin);
+}
+
+div {
+    background-color: #103681;
+}
+
+ul {
+    list-style-type:none;
+}
+
+li {
+    margin:calc(5px + 2vmin);
+}
