@@ -24,3 +24,7 @@ ul {
 li {
     margin:calc(5px + 2vmin);
 }
+
+body {
+    margin: 0;
+}

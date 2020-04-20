@@ -6,25 +6,42 @@ import data from "../../data/tutors.js";
 class NewTutor extends React.Component {
     
 state = {
-    id:'',
-    code: '',
-    coordinates: '',
-    address:'',
-    
-    name:'',
-    email:'',
-    availability:'',
-    price: '',
-    comments: '',
-    classes: '',
+    name:"",
+    email:"",
+    availability:"",
+    price: "",
+    comments: "",
+    classes: "",
     confirmed: false,
     deleteConfirmed: false,
-    update: false
+    update: false,
+    theData : data
 }
+
 
 handleSubmit = (event) => {
     event.preventDefault();
-    //AXIOS CALL HERE
+    // AXIOS CALL HERE
+
+    var classesArray = this.state.classes.split(" ");
+    
+    var newTutor = {
+        name: this.state.name,
+        email:this.state.email,
+        availability:this.state.availability,
+        price:this.state.price,
+        classes : classesArray,
+        comments : this.state.comments,
+        confirmed : false,
+        deleteConfirmed : false,
+        update: false,
+
+    }
+    
+    var updatedData = this.state.theData.concat([newTutor])
+    this.setState({theData: updatedData});
+    console.log(newTutor);
+    console.log(this.state.theData);
     
 
 }
@@ -36,6 +53,8 @@ render(){
             <HomeButton/>
 
                 <form onSubmit={this.handleSubmit}>
+                    <ul>
+                        <li>
                     <label>
                         Name:
                         <input type="text"
@@ -45,6 +64,8 @@ render(){
                         required 
                         />
                     </label>
+                    </li>
+                    <li>
                     <label>
                         Email:
                         <input type="text"
@@ -54,6 +75,8 @@ render(){
                         required
                         />
                     </label>
+                    </li>
+                    <li>
                     <label>
                         Availability:
                         <input type="text"
@@ -63,6 +86,8 @@ render(){
                         required
                         />
                     </label>
+                    </li>
+                    <li>
                     <label>
                         Price:
                         <input type="text"
@@ -71,6 +96,8 @@ render(){
                         onChange={event => this.setState({price: event.target.value})} 
                         />
                     </label>
+                    </li>
+                    <li>
                     <label>
                         Classes:
                         <input type="text"
@@ -79,6 +106,8 @@ render(){
                         onChange={event => this.setState({classes: event.target.value})} 
                         />
                     </label>
+                    </li>
+                    <li>
                     <label>
                         Comments:
                         <input type="text"
@@ -87,8 +116,11 @@ render(){
                         onChange={event => this.setState({comments: event.target.value})} 
                         />
                     </label>
-                
-                <input type="submit" value="Submit" />
+                    </li>
+                    </ul>
+                <label>
+                <input className = "submit" type="submit" value="Submit" />
+                </label>
                 </form>
         </div>
         )
