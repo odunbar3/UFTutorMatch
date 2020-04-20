@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 const Review = require('../models/ReviewModel')
 const nodemailer = require ('nodemailer');
 const uniqid = require('uniqid');
+const async = require('async');
+const Tutor = require('../models/TutorModel')
 
 exports.list = (req, res) => {
     Review.find({tutorEmail: req.body.tutorEmail, confirmed: true}, function(err, revs){
@@ -66,9 +68,53 @@ exports.create = (req, res) =>{
 
 exports.postReview = (req, res) => {
     console.log(req.params.id);
-    Review.updateOne({studentId: req.params.id}, {confirmed: true}, function(err, rev){
+    async.waterfall([
+        function(done){
+            Review.updateOne({studentId: req.params.id}, {confirmed: true}, function(err, rev){
+                if(err) res.status(200).send(err);
+                
+                else done(null);
+            })
+        }, function(done){
+            Review.findOne({studentId: req.params.id}, function(err, rev){
+                if(err) res.status(200).send(err);
+                
+                else{
+                    let tutorEmail = rev.tutorEmail;
+                    console.log(tutorEmail);
+                    done(null, tutorEmail);
+                }
+            })
+        },function(tutorEmail, done){
+            let ratings = 0;
+            let count = 0;
+
+            Review.find({tutorEmail: tutorEmail}, function(err, revs){
+                if(err) res.status(200).send(err);
+                else{
+                    console.log(revs);
+                    revs.forEach(element =>{
+                        count = count + 1;
+                        ratings = ratings + element.rating;
+                    })
+
+                    ratings = ratings/count;
+                    done(null,tutorEmail, ratings);
+                    
+                }
+            })
+            
+        }, function(tutorEmail, ratings, done){
+            Tutor.updateOne({email: tutorEmail}, {rating: ratings}, function(err, tut){
+                if(err) res.status(200).send(err);
+                else{
+                    res.status(200).send("Rating was posted to tutor");
+                    done(null);
+                }
+            })
+        }
+    ], function(err){
         if(err) res.status(200).send(err);
-        
-        else res.status(200).json({message: "Review has been activated"});
     })
+    
 }

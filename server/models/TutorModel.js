@@ -13,6 +13,7 @@ const tutorSchema = new mongoose.Schema({
   price: {type: Number, required: true},
   comments: {type: String, required: false},
   classes: [{type: String, required: false}],
+  rating: {type: Number},
   confirmed: {type: Boolean},
   deleteConfirmed: {type: Boolean},
   update: {type: Boolean}
