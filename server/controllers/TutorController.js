@@ -183,7 +183,7 @@ exports.list = (req, res) => {
             res.statusCode = 404;
             res.end({'error' : 'Tutor not found!'});
         } else {
-            res.json(tutor);
+            res.json({tutors: tutor});
         }
     });
 };
