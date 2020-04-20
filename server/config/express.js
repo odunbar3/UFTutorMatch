@@ -4,7 +4,7 @@ const path = require('path'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     tutorsRouter = require('../routes/TutorsRouter');
-    reviewRouter = require('../routes/RatingsRouter');
+    reviewRouter = require('../routes/ReviewRouter');
 
 module.exports.init = () => {
     /* 
