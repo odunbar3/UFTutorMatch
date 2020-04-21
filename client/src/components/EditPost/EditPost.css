@@ -1,0 +1,9 @@
+div {
+    background-color: #103681;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: calc(25px + 2vmin);
+    color: white;
+    /* padding-top: 50px; */
+}

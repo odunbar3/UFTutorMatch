@@ -9,7 +9,7 @@ export default function Tutor() {
             <HomeButton/>
             <h2 className = "heading2">Are you...</h2>
             <Link to = "/NewTutor" className = "buttons">Wanting to Tutor</Link>
-            <Link to = "/EditTutor" className = "buttons">Edit existing tutor listing</Link>
+            <Link to = "/EditTutor" className = "buttons">Manage a Tutor Listing</Link>
         </div>
     )
 }
