@@ -1,5 +1,5 @@
 const express = require('./config/express.js')
-const config = require('./config/config.js')
+const config = require('config')
 const mongoose = require('mongoose')
 
 mongoose.connect(config.db.uri, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}).then(() => {
