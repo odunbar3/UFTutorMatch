@@ -30,6 +30,16 @@ exports.create = async (req, res) => {
     // tutor.review = null;
     async.waterfall([
         function(done){
+            Tutor.findOne({email: req.body.email}, function(err, tut){
+                if(err) res.status(200).send(err);
+                else if(tut){
+                    res.status(200).json({errors: "Email already has a tutor post"});
+                } else{
+                    done(null);
+                }
+            })
+        },
+        function(done){
             const newTutor = new Tutor({
                 tutorId: uniqid(),
                 name: req.body.name,
@@ -319,3 +329,10 @@ exports.tutorByID = (req, res, next, id) => {
         }
     });
 };
+
+exports.search = (req, res) =>{
+    Tutor.find({classes: req.body.searchClass}, function(err, tuts){
+        if(err) res.status(200).send(err);
+        else res.status(200).json({tutors: tuts});
+    })
+}

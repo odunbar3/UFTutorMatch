@@ -23,6 +23,7 @@ tutorsRouter.put('/delete', tutors.delete) //Set post up to be deleted => send b
 tutorsRouter.delete('/delete/:id', tutors.deletePost) //Actually delete post (from link sent to user)
 tutorsRouter.put('/update', tutors.update) //Set post up to be updated => send back user elements that can change, oldEmail and id
 tutorsRouter.put('/update/:id', tutors.postUpdates) //Actually update post
+tutorsRouter.get('/search', tutors.search)
 
 //tutorsRouter.put('/:tutorId', tutors.update); //Update tutor post
 //tutorsRouter.delete('/:tutorId', tutors.remove); //Delete tutor post

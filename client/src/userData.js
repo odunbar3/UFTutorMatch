@@ -89,3 +89,10 @@ userData.activateUpdates() = async function(studentId){
 
     return review;   
 }
+
+//Search by class
+userData.searchClass() = async function(searchClass){
+    const tutors = await axios.get('tutors/search', searchClass);
+
+    return tutors;
+}
