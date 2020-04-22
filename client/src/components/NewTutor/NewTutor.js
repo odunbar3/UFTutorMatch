@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import "./NewTutor.css";
 import HomeButton from "../HomeButton/HomeButton"
 import ConfirmPage from "../ConfirmPage/ConfirmPage"
-import {Link} from "react-router-dom"
+import {Link,withRouter} from "react-router-dom"
 //import data from "../../data/tutors.js";
 class NewTutor extends React.Component {
 
@@ -46,7 +46,6 @@ handleSubmit = (event) => {
     
     this.props.updateData(this.state.theData.concat([newTutor]));
     this.isSubmit = true;
-
 
 
 }
@@ -145,4 +144,4 @@ render(){
 
 }
 
-export default NewTutor
+export default withRouter(NewTutor)

@@ -6,7 +6,7 @@ export default function LeavingReview() {
     return (
         <div>
             <HomeButton/>
-            <h1>Hi</h1>
+            <h1>Leave a Review!</h1>
         </div>
     )
 }

@@ -24,6 +24,8 @@ export default class EditTutor extends Component {
             return(
             <EditPost 
                 filledOut = {this.state}
+                data = {this.props.data}
+                
             />
             )
         }
