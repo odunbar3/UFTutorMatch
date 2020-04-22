@@ -1,28 +1,34 @@
-import React from 'react'
-//import {Link} from "react-router-dom";
+import React, { Component } from 'react'
 import "./NewTutor.css";
 import HomeButton from "../HomeButton/HomeButton"
-import data from "../../data/tutors.js";
+import ConfirmPage from "../ConfirmPage/ConfirmPage"
+import {Link} from "react-router-dom"
+//import data from "../../data/tutors.js";
 class NewTutor extends React.Component {
+
+constructor(props) {
+    super(props);
     
-state = {
-    name:"",
-    email:"",
-    availability:"",
-    price: "",
-    comments: "",
-    classes: "",
-    confirmed: false,
-    deleteConfirmed: false,
-    update: false,
-    theData : data
-}
+    this.state = {
+        name:"",
+        email:"",
+        availability:"",
+        price: "",
+        comments: "",
+        classes: "",
+        confirmed: false,
+        deleteConfirmed: false,
+        update: false,
+        theData: this.props.data,
+        isSubmit: false
+    };
+} 
+
+isSubmit = false;
 
 
 handleSubmit = (event) => {
     event.preventDefault();
-    // AXIOS CALL HERE
-
     var classesArray = this.state.classes.split(" ");
     
     var newTutor = {
@@ -30,28 +36,36 @@ handleSubmit = (event) => {
         email:this.state.email,
         availability:this.state.availability,
         price:this.state.price,
-        classes : classesArray,
         comments : this.state.comments,
+        classes : classesArray,
         confirmed : false,
         deleteConfirmed : false,
         update: false,
 
     }
     
-    var updatedData = this.state.theData.concat([newTutor])
-    this.setState({theData: updatedData});
-    console.log(newTutor);
-    console.log(this.state.theData);
-    
+    this.props.updateData(this.state.theData.concat([newTutor]));
+    this.isSubmit = true;
+
+
 
 }
 
 render(){
+    if (this.isSubmit) {
+        return (
+            <div>
+        <ConfirmPage/>
+        </div>
+        )
+    }
+
+    else
+    {
+
     return (
         <div>
-
             <HomeButton/>
-
                 <form onSubmit={this.handleSubmit}>
                     <ul>
                         <li>
@@ -94,6 +108,7 @@ render(){
                         placeholder="Price"
                         value={this.state.price} 
                         onChange={event => this.setState({price: event.target.value})} 
+                        required
                         />
                     </label>
                     </li>
@@ -104,6 +119,7 @@ render(){
                         placeholder="Classes"
                         value={this.state.classes} 
                         onChange={event => this.setState({classes: event.target.value})} 
+                        required
                         />
                     </label>
                     </li>
@@ -119,12 +135,14 @@ render(){
                     </li>
                     </ul>
                 <label>
-                <input className = "submit" type="submit" value="Submit" />
+                <button className = "buttons" type="submit" value="Submit">Submit</button>
                 </label>
                 </form>
         </div>
         )
     }
+    }
+
 }
 
 export default NewTutor
