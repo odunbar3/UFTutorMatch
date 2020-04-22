@@ -17,12 +17,13 @@ tutorsRouter.post('/create', tutors.create); //Create a tutor post
 /*
   The ':' specifies a URL parameter. 
  */
-tutorsRouter.get('/find/:id', tutors.read); //Read tutor post
+tutorsRouter.get('/find', tutors.read); //Read tutor post
 tutorsRouter.put('/create/:id', tutors.postTutor) //Activates post
 tutorsRouter.put('/delete', tutors.delete) //Set post up to be deleted => send back tutorId and email
 tutorsRouter.delete('/delete/:id', tutors.deletePost) //Actually delete post (from link sent to user)
 tutorsRouter.put('/update', tutors.update) //Set post up to be updated => send back user elements that can change, oldEmail and id
 tutorsRouter.put('/update/:id', tutors.postUpdates) //Actually update post
+tutorsRouter.get('/search', tutors.search)
 
 //tutorsRouter.put('/:tutorId', tutors.update); //Update tutor post
 //tutorsRouter.delete('/:tutorId', tutors.remove); //Delete tutor post

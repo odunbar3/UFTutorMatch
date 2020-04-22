@@ -30,6 +30,16 @@ exports.create = async (req, res) => {
     // tutor.review = null;
     async.waterfall([
         function(done){
+            Tutor.findOne({email: req.body.email}, function(err, tut){
+                if(err) res.status(200).send(err);
+                else if(tut){
+                    res.status(200).json({errors: "Email already has a tutor post"});
+                } else{
+                    done(null);
+                }
+            })
+        },
+        function(done){
             const newTutor = new Tutor({
                 tutorId: uniqid(),
                 name: req.body.name,
@@ -120,8 +130,8 @@ exports.postTutor = (req,res) =>{
 
 /* Show the current tutor */
 exports.read = async (req, res) => {
-    console.log(req.params.id);
-    const tut = await Tutor.find({tutorId: req.params.id});
+    console.log(req.body.email);
+    const tut = await Tutor.findOne({email: req.body.email});
     
     if(!tut){
         res.status(200).json({error: "Tutor not found"});
@@ -132,7 +142,7 @@ exports.read = async (req, res) => {
 
 exports.delete = async (req, res) =>{
     console.log(req.body);
-    Tutor.updateOne({tutorId: req.body.tutorId}, {deleteConfirmed: true}, function(err, tut){
+    Tutor.updateOne({email: req.body.email}, {deleteConfirmed: true}, function(err, tut){
         if(err) res.status(200).send(err);
         else if(tut.n === 0) res.status(200).json({message: "No tutor post found with that id"});
         else{
@@ -183,7 +193,7 @@ exports.list = (req, res) => {
             res.statusCode = 404;
             res.end({'error' : 'Tutor not found!'});
         } else {
-            res.json(tutor);
+            res.json({tutors: tutor});
         }
     });
 };
@@ -319,3 +329,10 @@ exports.tutorByID = (req, res, next, id) => {
         }
     });
 };
+
+exports.search = (req, res) =>{
+    Tutor.find({classes: req.body.searchClass}, function(err, tuts){
+        if(err) res.status(200).send(err);
+        else res.status(200).json({tutors: tuts});
+    })
+}
