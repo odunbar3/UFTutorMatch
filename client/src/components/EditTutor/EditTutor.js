@@ -1,52 +1,36 @@
-import {Link} from "react-router-dom";
+//import {Link} from "react-router-dom";
 import "./EditTutor.css";
 import HomeButton from "../HomeButton/HomeButton"
+import EditPost from "../EditPost/EditPost"
 import React, { Component } from 'react'
-import data from "../../data/tutors.js";
+//import data from "../../data/tutors.js";
 
 export default class EditTutor extends Component {
     state = {
-        name:"",
+        name: "",
         email:"",
-        availability:"",
-        price: "",
-        comments: "",
-        classes: "",
-        confirmed: false,
-        deleteConfirmed: false,
-        update: false,
-        theData : data
+        isSubmit: false
     }
     
     
     handleSubmit = (event) => {
-        event.preventDefault();
-        // AXIOS CALL HERE
-    
-        var classesArray = this.state.classes.split(" ");
-        
-        var newTutor = {
-            name: this.state.name,
-            email:this.state.email,
-            availability:this.state.availability,
-            price:this.state.price,
-            classes : classesArray,
-            comments : this.state.comments,
-            confirmed : false,
-            deleteConfirmed : false,
-            update: false,
-    
+        this.setState({isSubmit:true});
         }
-        
-        var updatedData = this.state.theData.concat([newTutor])
-        this.setState({theData: updatedData});
-        console.log(newTutor);
-        console.log(this.state.theData);
-        
+
+
+ render() {
+
+        if (this.state.isSubmit) {
+            return(
+            <EditPost 
+                filledOut = {this.state}
+            />
+            )
+        }
     
-    }
-    render() {
-        return (
+        else
+        {
+    return (
             <div>
                 <HomeButton/>
 
@@ -76,10 +60,12 @@ export default class EditTutor extends Component {
     </li>
     </ul>
 <label>
-<Link  className = "buttons">Look Up</Link>
+<button className = "buttons" type="submit" value="Submit">Look Up</button>
 </label>
 </form>
             </div>
         )
+    
     }
+}
 }

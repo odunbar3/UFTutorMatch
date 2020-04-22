@@ -21,8 +21,18 @@ ul{
 input{
     margin:calc(15px + 2vmin);
 }
-.submit{
-font-size: calc(100px + 2vmin);
+.buttons{
+    color:#103681;
+    background: white;
+    text-decoration:none;
+    border:none;
+    padding: 10px 25px;
+    display: inline-block;
+    cursor:pointer;
+    margin-bottom: 10px;
+    text-align:center;
+    font-size:calc(15px + 2vmin);
+    font-weight:normal;
 }
 
 body{

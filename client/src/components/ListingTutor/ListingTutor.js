@@ -2,53 +2,75 @@
 import React, { Component } from 'react'
 import HomeButton from "../HomeButton/HomeButton"
 import "./ListingTutor.css";
-import data from "../../data/tutors.js";
+//import data from "../../data/tutors.js";
 import {Link} from "react-router-dom";
+import TutorInfo from "../TutorInfo/TutorInfo"
 
 export default class ListingTutor extends Component {
 
-render() {
+constructor(props) {
+    super(props);
+        
+    this.state = {
+    typedClass: " ",
+    clickedOn: false,
+    tutor:{}
+    }
+}
 
-    var typedClass = ""
+clickedOn = (theEmail) => {
+    //this.setState({clickedOn:true})
 
-    const classList = data
+    }
+
+    render() {
+
+    var typedClass = this.state.typedClass
+    var classList = this.props.data
     .filter(classes => {
-        console.log(classes.name)
         var test = classes.classes.filter(function(classi) {
-            console.log(classi)
             return classi.toLowerCase().indexOf(typedClass.toLowerCase()) >= 0
         });
-        console.log(test)
         var isValid = false
         if (test[0])
         {
             isValid = true
         }
-        console.log(isValid)
         return isValid;
     });
 
     const tutorsList = classList.map(tutor => {
         return (
-            <Link className = "buttons">
+           <Link> <button className = "buttons" onClick = {this.clickedOn(tutor.email)}>
                 <ul>
                 <li>{tutor.name}</li>
                 <li>${tutor.price}/hr</li>
                 <li>{tutor.classes}</li>
                 </ul>
+             </button>
              </Link>
         )
     })
-        
-    console.log("Filtered class list:")
-    console.log(classList)
     
     return (
             <div>
                 <HomeButton/>
+                <label>
+                    Search by Class:
+                <input type="text"
+                        placeholder = "Class Code"
+                        onChange={event => this.setState({typedClass: event.target.value})}
+                        />
+                        </label>
                 {tutorsList}
             </div>
         )
+
+        if(this.state.clickedOn){
+            return (
+                <TutorInfo/>
+            )
+        }
     }
 }
 

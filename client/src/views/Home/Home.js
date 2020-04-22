@@ -6,8 +6,8 @@ function Home() {
         <div className="App-header">
             <h1 className = "heading">Welcome to UF Tutor Match</h1>
             <h2 className = "heading2">Are you a ...</h2>
-            <Link to = "/Student" className = "buttons">Student</Link>
-            <Link to = "/Tutor" className = "buttons">Tutor</Link>
+            <Link to = "/Student" className = "firstButtons">Student</Link>
+            <Link to = "/Tutor" className = "firstButtons">Tutor</Link>
         </div>
     );
 }
