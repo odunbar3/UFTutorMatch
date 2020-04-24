@@ -5,6 +5,7 @@ import "./ListingTutor.css";
 //import data from "../../data/tutors.js";
 import {Link} from "react-router-dom";
 import TutorInfo from "../TutorInfo/TutorInfo"
+import axios from 'axios';
 
 export default class ListingTutor extends Component {
 
@@ -14,18 +15,39 @@ constructor(props) {
     this.state = {
     typedClass: " ",
     clickedOn: false,
+    tutorList : {},
     tutor:{}
+    
     }
 }
 
+
+
+componentWillMount() {
+
+    axios.get(`http://localhost:5000/tutors/list`)
+        .then(res => {
+            console.log(res.data);
+            this.setState({tutorList: res.data})
+        })
+
+}
+
+
 clickedOn = (theEmail) => {
-    //this.setState({clickedOn:true})
+    this.setState({clickedOn:true})
 
     }
 
     render() {
-
     var typedClass = this.state.typedClass
+    console.log(this.state.tutorList)
+    console.log(this.props.data)
+    console.log(this.state.tutorList.tutors
+        .filter(classes => {
+            return classes.name === "Jane Smith"
+        })
+    )
     var classList = this.props.data
     .filter(classes => {
         var test = classes.classes.filter(function(classi) {
