@@ -6,7 +6,8 @@ export default class ConfirmPage extends Component {
     render() {
         return (
             <div className = "App-header">
-                <h2>All done! Your information has been updated!</h2>
+                <h1 className = "confirmation">Thank you for {this.props.status} your {this.props.isWhat}!</h1>
+                <h1>Please verify your email before your {this.props.isWhat} becomes visible.</h1>
                 <HomeButton/>
             </div>
         )
