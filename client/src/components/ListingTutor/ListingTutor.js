@@ -12,15 +12,14 @@ constructor(props) {
     super(props);
         
     this.state = {
-    typedClass: " ",
-    clickedOn: false,
-    tutor:{}
+        typedClass: " ",
+        clickedOn: false,
+        tutor:{}
     }
 }
 
-clickedOn = (theEmail) => {
-    //this.setState({clickedOn:true})
-
+    clickedOn = (theEmail) => {
+        //this.setState({clickedOn:true})
     }
 
     render() {
@@ -40,6 +39,7 @@ clickedOn = (theEmail) => {
     });
 
     const tutorsList = classList.map(tutor => {
+        {console.log(classList)}
         return (
            <Link> <button className = "buttons" onClick = {this.clickedOn(tutor.email)}>
                 <ul>

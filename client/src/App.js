@@ -8,7 +8,7 @@ import NewTutor from "./components/NewTutor/NewTutor";
 import EditTutor from "./components/EditTutor/EditTutor";
 import ConfirmPage from "./components/ConfirmPage/ConfirmPage";
 import Home from "./views/Home/Home";
-
+import userData from "./userData";
 
 
 class App extends Component {
@@ -17,13 +17,14 @@ class App extends Component {
     super(props);
     
     this.state = {
-    data: this.props.listing
+      data: userData.getTutors()
     }
   }
 
-  updateData = (newData) => {
-  this.setState({ data:newData });
-}
+  updateData = () => {
+    this.setState({ data:userData.getTutors() });
+    console.log(this.state.data);
+  }
 
 
 
