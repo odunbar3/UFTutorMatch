@@ -62,6 +62,7 @@ clickedOn = (theEmail) => {
     });
 
     const tutorsList = classList.map(tutor => {
+        {console.log(classList)}
         return (
            <Link> <button className = "buttons" onClick = {this.clickedOn(tutor.email)}>
                 <ul>
