@@ -1,0 +1,44 @@
+div {
+    background-color: #103681;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: calc(25px + 2vmin);
+    color: white;
+    /* padding-top: 50px; */
+}
+
+form{
+    align-items:right;
+}
+body {
+    margin: 0;
+}
+ul{
+    list-style-type:none;
+    align-items:right;
+}
+input{
+    margin:calc(15px + 2vmin);
+}
+.submit{
+font-size: calc(100px + 2vmin);
+}
+
+body{
+    background-color: #103681;
+}
+
+.buttons{
+    color:#103681;
+    background: white;
+    text-decoration:none;
+    border:none;
+    padding: 15px 32px;
+    display: inline-block;
+    cursor:pointer;
+    margin-bottom: 20px;
+    text-align:center;
+    font-size:calc(15px + 2vmin);
+    font-weight:normal;
+}

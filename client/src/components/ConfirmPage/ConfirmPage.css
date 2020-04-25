@@ -2,8 +2,9 @@ body {
     margin: 0;
 }
 
-h1{
+.confirmation{
     align-text:center;
+    font-size:50px;
 }
 
 .App-header {
