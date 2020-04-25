@@ -23,6 +23,9 @@ export default class EditPost extends Component {
 }
     componentWillMount()
     {
+        //AXIOS call to get tutor object from this.props.filledOut.email and store in the state ^^
+
+
     //     var data = this.props.data
     //     var email = this.props.filledOut.email
     //     var tutor = data.filter(data => data.email === email)
@@ -41,14 +44,6 @@ export default class EditPost extends Component {
     //         }
     //         )
     //     }
-    const emailObject = {
-        email: this.props.filledOut.email
-    }    
-    userData.findTutorPost(emailObject)
-        .then((response) => {
-          {console.log(response)}
-        })
-
     }
 
     handleSubmit = (event) => {
@@ -65,8 +60,6 @@ export default class EditPost extends Component {
             comments : this.state.comments,
             classes : classesArray
         }
-
-
 
         //AXIOS CALL TO PUT EDIT TUTOR HERE
 

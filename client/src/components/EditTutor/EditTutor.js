@@ -14,12 +14,13 @@ export default class EditTutor extends Component {
         name: "",
         email:"",
         isSubmit: false,
-        tutor:{}
         }
     }
     
     handleSubmit = (event) => {
-        
+        //AXIOS call to fetch if entered email exists
+        //If email exists, set isSubmit to true
+
         // userData.findTutorPost(this.state.email)
         // .then((response) => {
         //     {console.log(response)} 
@@ -38,7 +39,6 @@ export default class EditTutor extends Component {
         //         {console.log("Email entered was found")}
         //         {console.log(response.data)}
         //         this.setState({
-        //             tutor:response.data.tutor,
         //             isSubmit:true
         //         })
         //     }
