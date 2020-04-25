@@ -23,11 +23,11 @@ export default class EditTutor extends Component {
         // userData.findTutorPost(this.state.email)
         // .then((response) => {
         //     {console.log(response)} 
-        //     if (response.error)
+        //     if (response.data.error)
         //     {
 
         //         //Print error messages here
-        //         {console.log(response.error)}
+        //         {console.log(response.data.error)}
         //         {console.log("An error has occured in editTutor")}
 
         //         this.setState({isSubmit:false})
@@ -36,8 +36,9 @@ export default class EditTutor extends Component {
         //     else
         //     {
         //         {console.log("Email entered was found")}
+        //         {console.log(response.data)}
         //         this.setState({
-        //             tutor:response.tutor,
+        //             tutor:response.data.tutor,
         //             isSubmit:true
         //         })
         //     }

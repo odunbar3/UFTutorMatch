@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Link} from "react-router-dom";
 import HomeButton from "../HomeButton/HomeButton"
 import ConfirmPage from "../ConfirmPage/ConfirmPage"
+import userData from '../../userData';
 
 export default class EditPost extends Component {
 
@@ -10,17 +11,17 @@ export default class EditPost extends Component {
         super(props);
             
         this.state = {
-        name:"",
+        name:"Nope",
         email:"",
         availability:"",
         price: "",
         comments: "",
-        classes: "",
+        classes: [],
     
         isSubmit: false
     }
 }
-    componentDidMount()
+    componentWillMount()
     {
     //     var data = this.props.data
     //     var email = this.props.filledOut.email
@@ -40,7 +41,13 @@ export default class EditPost extends Component {
     //         }
     //         )
     //     }
-
+    const emailObject = {
+        email: this.props.filledOut.email
+    }    
+    userData.findTutorPost(emailObject)
+        .then((response) => {
+          {console.log(response)}
+        })
 
     }
 
@@ -48,6 +55,18 @@ export default class EditPost extends Component {
         event.preventDefault();
 
         //CODE TO CONSTRUCT EDIT TUTOR OBJECT HERE
+        var classesArray = this.state.classes.split(" ");
+
+        var editedTutor = {
+            name: this.state.name,
+            email:this.state.email,
+            availability:this.state.availability,
+            price:this.state.price,
+            comments : this.state.comments,
+            classes : classesArray
+        }
+
+
 
         //AXIOS CALL TO PUT EDIT TUTOR HERE
 
@@ -73,8 +92,7 @@ export default class EditPost extends Component {
                             <label>
                                 Name:
                                 <input type="text"
-                                placeholder="Jeff Jones"
-                                //value={this.state.name} 
+                                placeholder="First and Last"
                                 defaultValue = {this.state.name}
                                 onChange={event => this.setState({name: event.target.value})}
                                 required 
@@ -85,8 +103,7 @@ export default class EditPost extends Component {
                             <label>
                                 Email:
                                 <input type="text"
-                                placeholder="jeffjones@email.com"
-                                //value={this.state.email} 
+                                placeholder="example@email.com"
                                 defaultValue = {this.state.email}
                                 onChange={event => this.setState({email: event.target.value})} 
                                 required
@@ -97,8 +114,7 @@ export default class EditPost extends Component {
                             <label>
                                 Availability:
                                 <input type="text"
-                                placeholder="Sunday 8-6"
-                                value={this.state.availability} 
+                                placeholder="Days and Times"
                                 defaultValue = {this.state.availability}
                                 onChange={event => this.setState({availability: event.target.value})} 
                                 required
@@ -109,8 +125,7 @@ export default class EditPost extends Component {
                             <label>
                                 Price:
                                 <input type="text"
-                                placeholder="10"
-                                //value={this.state.price} 
+                                placeholder="$"
                                 defaultValue = {this.state.price}
                                 onChange={event => this.setState({price: event.target.value})} 
                                 required
@@ -121,8 +136,7 @@ export default class EditPost extends Component {
                             <label>
                                 Classes:
                                 <input type="text"
-                                placeholder="STA2023, STA3024, STA4322"
-                                //value={this.state.classes} 
+                                placeholder="Class codes with spaces in between"
                                 defaultValue = {this.state.classes}
                                 onChange={event => this.setState({classes: event.target.value})} 
                                 required
@@ -133,8 +147,7 @@ export default class EditPost extends Component {
                             <label>
                                 Comments:
                                 <input type="text"
-                                placeholder="I know engineering"
-                                //value={this.state.comments}
+                                placeholder="Extra info for students"
                                 defaultValue = {this.state.comments}
                                 onChange={event => this.setState({comments: event.target.value})} 
                                 />
