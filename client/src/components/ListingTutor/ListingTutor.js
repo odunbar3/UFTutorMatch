@@ -17,7 +17,7 @@ export default class ListingTutor extends Component {
         typedClass: " ",
         clickedOn: false,
         tutorList : this.props.data,
-        classList: [],
+        classList: this.props.data,
         tutor:{}
         
         }
@@ -54,14 +54,35 @@ export default class ListingTutor extends Component {
     // }
 
 
-    clickedOn = (theEmail) => {
-        this.setState({clickedOn:true})
+        clickedOn = (theEmail) => {
+            this.setState({clickedOn:true})
 
-    }
-    
-    onClassChange = (event) =>{
+        }
 
-        // this.setState({typedClass: event.target.value})
+        onClassChange = async (event) =>{
+
+            this.setState({typedClass: event.target.value})
+            console.log(typeof this.state.tutorList);
+            console.log(event.target.value)
+            let array = await this.state.tutorList.filter(function(item){
+                console.log(typeof item.classes[0]);
+                console.log(item);
+                console.log(item.classes);
+                let isValid = false;
+                item.classes.forEach((oneClass) =>{
+                    console.log(oneClass);
+                    
+                    if(oneClass.includes(event.target.value)){
+                        isValid = true;
+                        return isValid;
+                    }
+                })
+                return isValid;
+            })
+            console.log(array);
+
+            this.setState({classList : array});
+        
         // this.state.classList.filter(classes => {
         //     var test = classes.classes.filter(function(classi) {
         //         return classi.toLowerCase().indexOf(typedClass.toLowerCase()) >= 0
@@ -73,7 +94,7 @@ export default class ListingTutor extends Component {
         //     }
         //     return isValid;
         // });
-    }
+        }
 
     renderTutor = (element) => {
 
@@ -125,7 +146,7 @@ export default class ListingTutor extends Component {
                         />
                         </label>
                 {console.log(this.state.tutorList)}
-                {this.state.tutorList.map((element)=> {return this.renderTutor(element)})}
+                {this.state.classList.map((element)=> {return this.renderTutor(element)})}
             </div>
         )
 
