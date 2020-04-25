@@ -6,7 +6,6 @@ const userData = axios.create();
 userData.getTutors = async function(){
     const response = await axios.get('/tutors/list');
 
-    console.log(response.data.tutors);
 
     return response.data.tutors;
 };

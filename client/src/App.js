@@ -17,14 +17,27 @@ class App extends Component {
     super(props);
     
     this.state = {
-      data: userData.getTutors()
+      data: []
     }
   }
 
   updateData = () => {
     this.setState({ data:userData.getTutors() });
-    console.log(this.state.data);
   }
+
+  componentDidMount() {
+
+    // this.getTutors();
+    userData.getTutors()
+    .then((response)=>{
+        let tutorArray = [...this.state.data];
+        response.forEach((element)=>{
+            tutorArray.push(element);
+        });
+        this.setState({data: tutorArray});
+    })
+
+}
 
 
 

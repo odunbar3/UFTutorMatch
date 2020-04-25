@@ -6,74 +6,113 @@ import "./ListingTutor.css";
 import {Link} from "react-router-dom";
 import TutorInfo from "../TutorInfo/TutorInfo"
 import axios from 'axios';
+import userData from '../../userData';
 
 export default class ListingTutor extends Component {
 
-constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
+            
+        this.state = {
+        typedClass: " ",
+        clickedOn: false,
+        tutorList : this.props.data,
+        classList: [],
+        tutor:{}
         
-    this.state = {
-    typedClass: " ",
-    clickedOn: false,
-    tutorList : {},
-    tutor:{}
-    
+        }
     }
-}
 
+    componentDidMount() {
 
-
-componentWillMount() {
-
-    axios.get(`http://localhost:5000/tutors/list`)
-        .then(res => {
-            console.log(res.data);
-            this.setState({tutorList: res.data})
+        // this.getTutors();
+        userData.getTutors()
+        .then((response)=>{
+            let tutorArray = [];
+            response.forEach((element)=>{
+                tutorArray.push(element);
+            });
+            this.setState({tutorList: tutorArray});
         })
 
-}
+    }
 
 
-clickedOn = (theEmail) => {
-    this.setState({clickedOn:true})
 
+    // getTutors = async () =>{
+    //     let response = await userData.getTutors();
+    //     console.log(response);
+
+    //     let tutorArray = [...this.state.tutorList];
+    //     response.forEach((element)=>{
+    //         tutorArray.push(element);
+    //     })
+
+    //     console.log(tutorArray);
+    //     this.setState({tutorList: tutorArray});
+    //     console.log(this.state.tutorList);
+    // }
+
+
+    clickedOn = (theEmail) => {
+        this.setState({clickedOn:true})
+
+    }
+
+    onClassChange = (event) =>{
+
+        // this.setState({typedClass: event.target.value})
+        // this.state.classList.filter(classes => {
+        //     var test = classes.classes.filter(function(classi) {
+        //         return classi.toLowerCase().indexOf(typedClass.toLowerCase()) >= 0
+        //     });
+        //     var isValid = false
+        //     if (test[0])
+        //     {
+        //         isValid = true
+        //     }
+        //     return isValid;
+        // });
+    }
+
+    renderTutor = (element) => {
+
+            
+            return(
+                <li key ={element.email}>
+                    {console.log(element.name)}
+                    <ul>
+                       <li>{element.name}</li>
+                         <li>${element.price}/hr</li>
+                         <li>{element.classes}</li>
+                     </ul>
+
+                </li>
+            )
+    //     this.state.tutorsList.map(tutor => {
+    //     // {console.log(classList)}
+    //     return (
+    //         <Link> <button className = "buttons" onClick = {this.clickedOn(tutor.email)}>
+    //                 <ul>
+    //                 <li>{tutor.name}</li>
+    //                 <li>${tutor.price}/hr</li>
+    //                 <li>{tutor.classes}</li>
+    //                 </ul>
+    //             </button>
+    //             </Link>
+    //         )
+    //     })
     }
 
     render() {
-    var typedClass = this.state.typedClass
-    console.log(this.state.tutorList)
-    console.log(this.props.data)
-    console.log(this.state.tutorList.tutors
-        .filter(classes => {
-            return classes.name === "Jane Smith"
-        })
-    )
-    var classList = this.props.data
-    .filter(classes => {
-        var test = classes.classes.filter(function(classi) {
-            return classi.toLowerCase().indexOf(typedClass.toLowerCase()) >= 0
-        });
-        var isValid = false
-        if (test[0])
-        {
-            isValid = true
-        }
-        return isValid;
-    });
+        //console.log(this.props.data)
+        
+            // .filter(classes => {
+            //     return classes.name === "Jane Smith"
+            // })
+        
 
-    const tutorsList = classList.map(tutor => {
-        {console.log(classList)}
-        return (
-           <Link> <button className = "buttons" onClick = {this.clickedOn(tutor.email)}>
-                <ul>
-                <li>{tutor.name}</li>
-                <li>${tutor.price}/hr</li>
-                <li>{tutor.classes}</li>
-                </ul>
-             </button>
-             </Link>
-        )
-    })
+    
     
     return (
             <div>
@@ -82,18 +121,19 @@ clickedOn = (theEmail) => {
                     Search by Class:
                 <input type="text"
                         placeholder = "Class Code"
-                        onChange={event => this.setState({typedClass: event.target.value})}
+                        onChange={this.onClassChange}
                         />
                         </label>
-                {tutorsList}
+                {console.log(this.state.tutorList)}
+                {this.state.tutorList.map((element)=> {return this.renderTutor(element)})}
             </div>
         )
 
-        if(this.state.clickedOn){
-            return (
-                <TutorInfo/>
-            )
-        }
+        // if(this.state.clickedOn){
+        //     return (
+        //         <TutorInfo/>
+        //     )
+        // }
     }
 }
 
