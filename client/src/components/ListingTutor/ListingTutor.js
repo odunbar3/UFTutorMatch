@@ -73,21 +73,26 @@ export default class ListingTutor extends Component {
         //     }
         //     return isValid;
         // });
+
+
+        
     }
 
     renderTutor = (element) => {
 
             
             return(
-                <li key ={element.email}>
-                    {console.log(element.name)}
+                <button key ={element.email} className = "buttons" >
                     <ul>
-                       <li>{element.name}</li>
-                         <li>${element.price}/hr</li>
-                         <li>{element.classes}</li>
-                     </ul>
+                        {/* {console.log(element.name)} */}
+                        {/* <ul> */}
+                            <li>{element.name}</li>
+                            <li>${element.price}/hr</li>
+                            <li>{element.classes}</li>
+                        {/* </ul> */}
 
-                </li>
+                    </ul>
+                </button> 
             )
     //     this.state.tutorsList.map(tutor => {
     //     // {console.log(classList)}
@@ -124,7 +129,7 @@ export default class ListingTutor extends Component {
                         onChange={this.onClassChange}
                         />
                         </label>
-                {console.log(this.state.tutorList)}
+                {/* {console.log(this.state.tutorList)} */}
                 {this.state.tutorList.map((element)=> {return this.renderTutor(element)})}
             </div>
         )

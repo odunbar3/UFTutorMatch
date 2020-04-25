@@ -3,6 +3,7 @@ import "./NewTutor.css";
 import HomeButton from "../HomeButton/HomeButton"
 import ConfirmPage from "../ConfirmPage/ConfirmPage"
 import {Link,withRouter} from "react-router-dom"
+import userData from '../../userData';
 //import data from "../../data/tutors.js";
 
 export default class NewTutor extends React.Component {
@@ -17,9 +18,6 @@ constructor(props) {
         price: "",
         comments: "",
         classes: "",
-        confirmed: false,
-        deleteConfirmed: false,
-        update: false,
         theData: this.props.data,
         isSubmit: false
     };
@@ -33,24 +31,38 @@ handleSubmit = (event) => {
 
     //CODE TO CONSTRUCT NEW TUTOR OBJECT HERE
 
-    // var classesArray = this.state.classes.split(" ");
+    var classesArray = this.state.classes.split(" ");
     
-    // var newTutor = {
-    //     name: this.state.name,
-    //     email:this.state.email,
-    //     availability:this.state.availability,
-    //     price:this.state.price,
-    //     comments : this.state.comments,
-    //     classes : classesArray,
-    //     confirmed : false,
-    //     deleteConfirmed : false,
-    //     update: false,
-
-    // }
+    var newTutor = {
+        name: this.state.name,
+        email:this.state.email,
+        availability:this.state.availability,
+        price:this.state.price,
+        comments : this.state.comments,
+        classes : classesArray
+    }
 
     //AXIOS CALL TO PUT NEW TUTOR HERE
+    userData.createTutorPost(newTutor)
+    .then((response) => {
+        if (response.created === false)
+        {
+            this.setState({isSubmit:false})
 
-   this.setState({isSubmit:true})
+            //Print error messages here
+            {console.log(response.errors)}
+            {console.log("An error has occured in newTutor")}
+        }
+
+        else
+        {
+            this.setState({isSubmit:true})
+        }
+
+    })
+    
+
+
 
 
 }

@@ -17,7 +17,6 @@ userData.createTutorPost = async function(tutor){
         errors: "",
         created: false,
     }
-
     if(tutorsPost.errors){
         response.errors = tutorsPost.errors;
     } else{
