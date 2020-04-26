@@ -64,6 +64,7 @@ export default class EditPost extends Component {
         //AXIOS CALL TO PUT EDIT TUTOR HERE
         const response = await userData.updateTutorPost(editedTutor);
         console.log(response);
+        this.props.updateConfirmation("updating", "post")
         this.props.history.push("/ConfirmPage")
         // this.setState({isSubmit:true});
     }
@@ -73,6 +74,8 @@ export default class EditPost extends Component {
 
         const response = await userData.deleteTutorPost({email:this.state.email});
         console.log(response);
+        this.props.updateConfirmation("deleting", "post")
+        this.props.history.push("/ConfirmPage")
 
 
     }

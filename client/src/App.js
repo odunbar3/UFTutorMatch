@@ -22,7 +22,11 @@ class App extends Component {
     this.state = {
       data: [],
       tutor: [],
-      reviews: []
+      reviews: [],
+      confirmation:{
+        status: "",
+        isWhat: ""
+      }
     }
   }
 
@@ -33,6 +37,15 @@ class App extends Component {
   updateTutor = async (tutor)=>{
     await this.setState({tutor: tutor});
     console.log(this.state.tutor);
+  }
+
+  updateConfirmation = async(status, isWhat) =>{
+    let con = {
+      status: status,
+      isWhat: isWhat
+    }
+    await this.setState({confirmation : con});
+    console.log(this.state.confirmation)
   }
 
   componentDidMount() {
@@ -78,8 +91,8 @@ class App extends Component {
                 updateTutor={this.updateTutor} 
               />}
           />
-          <Route exact path = "/ConfirmPage" component = {ConfirmPage}/>
-          <Route exact path ="/EditPost" render={props=><EditPost {...props} tutor={this.state.tutor}/>}/>
+          <Route exact path = "/ConfirmPage" render={props=><ConfirmPage isWhat={this.state.confirmation.isWhat} status={this.state.confirmation.status}/>}/>
+          <Route exact path ="/EditPost" render={props=><EditPost {...props} tutor={this.state.tutor} confirmation ={this.state.confirmation} updateConfirmation={this.updateConfirmation}/>}/>
           <Route exact path = "/AboutTutor" render={props=><AboutTutor {...props} tutor = {this.state.tutor}/>}/>
           <Route exact path="/">
             <Redirect to="/Home" />
