@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import TutorInfo from "../TutorInfo/TutorInfo"
 import axios from 'axios';
 import userData from '../../userData';
+import AboutTutor from "../AboutTutor/AboutTutor"
 
 export default class ListingTutor extends Component {
 
@@ -18,14 +19,13 @@ export default class ListingTutor extends Component {
         clickedOn: false,
         tutorList : this.props.data,
         classList: this.props.data,
-        tutor:{}
+        tutorEmail:""
         
         }
     }
 
     componentDidMount() {
-
-        // this.getTutors();
+        //AXIOS call to get list of tutors
         userData.getTutors()
         .then((response)=>{
             let tutorArray = [];
@@ -54,8 +54,10 @@ export default class ListingTutor extends Component {
     // }
 
 
-        clickedOn = (theEmail) => {
-            this.setState({clickedOn:true})
+        clickedOn = (email) => {
+            this.setState(
+                {tutorEmail:email,
+                clickedOn:true})
 
         }
 
@@ -100,7 +102,7 @@ export default class ListingTutor extends Component {
 
             
             return(
-                <button key ={element.email} className = "buttons" >
+                <button onClick = {() => this.clickedOn(element.email)} key ={element.email} className = "buttons" >
                     <ul>
                         {/* {console.log(element.name)} */}
                         {/* <ul> */}
@@ -134,8 +136,10 @@ export default class ListingTutor extends Component {
             //     return classes.name === "Jane Smith"
             // })
         
-
-    
+if(this.state.clickedOn){
+    return (<AboutTutor tutorEmail = {this.state.tutorEmail}/>)
+}
+    else{
     
     return (
             <div>
@@ -151,6 +155,7 @@ export default class ListingTutor extends Component {
                 {this.state.classList.map((element)=> {return this.renderTutor(element)})}
             </div>
         )
+    }
 
         // if(this.state.clickedOn){
         //     return (
