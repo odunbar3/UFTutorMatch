@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch, Redirect  } from 'react-router-dom';
+import { Route, Switch, Redirect,BrowserRouter  } from 'react-router-dom';
 import Student from "./components/Student/Student";
 import Tutor from "./components/Tutor/Tutor";
 import ListingTutor from "./components/ListingTutor/ListingTutor";
@@ -9,6 +9,7 @@ import EditTutor from "./components/EditTutor/EditTutor";
 import ConfirmPage from "./components/ConfirmPage/ConfirmPage";
 import Home from "./views/Home/Home";
 import userData from "./userData";
+
 import AboutTutor from "./components/AboutTutor/AboutTutor"
 
 
@@ -19,7 +20,8 @@ class App extends Component {
     
     this.state = {
       data: [],
-      tutorEmail: ""
+      tutor: [],
+      reviews: []
     }
   }
 
@@ -27,9 +29,9 @@ class App extends Component {
     this.setState({ data:userData.getTutors() });
   }
 
-  updateTutorEmail = (email)=>{
-    this.setState({tutorEmail: email});
-    console.log(this.state.tutorEmail);
+  updateTutor = async (tutor)=>{
+    await this.setState({tutor: tutor});
+    console.log(this.state.tutor);
   }
 
   componentDidMount() {
@@ -52,16 +54,15 @@ class App extends Component {
   render(){
     return (
       <div>
+        <BrowserRouter>
         <Switch>
           <Route exact path="/Home" component={Home} />
           <Route exact path="/Student" component = {Student}/>
-          <Route exact path = "/Tutor" component = {() =><Tutor tutorEmail={this.state.tutorEmail}/>}/>
-          <Route exact path = "/ListingTutor" 
-            component={() => 
-            <ListingTutor 
+          <Route exact path = "/Tutor" component = {() =><Tutor tutor={this.state.tutor}/>}/>
+          <Route path = "/ListingTutor" render={props=><ListingTutor {...props}
               data={this.state.data}
-              tutorEmail = {this.state.tutorEmail}
-              updateTutorEmail={this.updateTutorEmail} 
+              tutor = {this.state.tutor}
+              updateTutor={this.updateTutor} 
             />}
           />
           <Route exact path = "/LeavingReview" component = {LeavingReview}/>
@@ -80,11 +81,12 @@ class App extends Component {
               />}
           />
           <Route exact path = "/ConfirmPage" component = {ConfirmPage}/>
-          <Route exact path = "/AboutTutor" component = {AboutTutor}/>
+          <Route exact path = "/AboutTutor" render={props=><AboutTutor {...props} tutor = {this.state.tutor}/>}/>
           <Route exact path="/">
             <Redirect to="/Home" />
           </Route>
         </Switch>
+        </BrowserRouter>
       </div>
     );
   }

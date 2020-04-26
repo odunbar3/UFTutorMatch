@@ -51,6 +51,9 @@ handleSubmit = (event) => {
             //Print error messages here
             {console.log(response.errors)}
             {console.log("An error has occured in newTutor")}
+        } else if(response.errors !== undefined){
+            this.setState({isSubmitted:false});
+            alert("That email is already associated with a post");
         }
 
         else

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import HomeButton from "../HomeButton/HomeButton"
 import "./ListingTutor.css";
 //import data from "../../data/tutors.js";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import TutorInfo from "../TutorInfo/TutorInfo"
 import axios from 'axios';
 import userData from '../../userData';
@@ -18,25 +18,25 @@ export default class ListingTutor extends Component {
         typedClass: " ",
         // clickedOn: false,
         tutorList : this.props.data,
-        classList: this.props.data,
-        tutorEmail:""
+        classList: this.props.data
+        // tutorEmail:""
         
         }
     }
 
-    // componentDidMount() {
+    componentDidMount() {
 
-    //     // this.getTutors();
-    //     userData.getTutors()
-    //     .then((response)=>{
-    //         let tutorArray = [];
-    //         response.forEach((element)=>{
-    //             tutorArray.push(element);
-    //         });
-    //         this.setState({tutorList: tutorArray});
-    //     })
+        // this.getTutors();
+        userData.getTutors()
+        .then((response)=>{
+            let tutorArray = [];
+            response.forEach((element)=>{
+                tutorArray.push(element);
+            });
+            this.setState({tutorList: tutorArray});
+        })
 
-    // }
+    }
 
 
 
@@ -56,10 +56,11 @@ export default class ListingTutor extends Component {
 
 
     clickedOn = (element) => {
-        console.log(element.email);
+        console.log(element);
+        
         // this.setState({clickedOn:true})
-        // this.props.updateTutorEmail(theEmail);
-        //this.props.history.push('/Tutor');
+        this.props.updateTutor(element);
+        this.props.history.push('/AboutTutor');
     }
 
     onClassChange = async (event) =>{
@@ -90,7 +91,7 @@ export default class ListingTutor extends Component {
                     <ul>
                        <li>{element.name}</li>
                          <li>${element.price}/hr</li>
-                         <li>{element.classes}</li>
+                         <li>{element.classes}</li>  {/*TODO: RENDER LIST OF CLASSES */}
                      </ul>
 
                 </li>
@@ -116,13 +117,8 @@ export default class ListingTutor extends Component {
         
             // .filter(classes => {
             //     return classes.name === "Jane Smith"
-            // })
-        
-if(this.state.clickedOn){
-    return (<AboutTutor tutorEmail = {this.state.tutorEmail}/>)
-}
-    else{
-    
+            // })   
+ 
     return (
             <div>
                 <HomeButton/>
@@ -144,6 +140,5 @@ if(this.state.clickedOn){
         //         <TutorInfo/>
         //     )
         // }
-    }
 }
 
