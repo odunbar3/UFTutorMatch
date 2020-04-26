@@ -9,6 +9,7 @@ import EditTutor from "./components/EditTutor/EditTutor";
 import ConfirmPage from "./components/ConfirmPage/ConfirmPage";
 import Home from "./views/Home/Home";
 import userData from "./userData";
+import AboutTutor from "./components/AboutTutor/AboutTutor"
 
 
 class App extends Component {
@@ -79,6 +80,7 @@ class App extends Component {
               />}
           />
           <Route exact path = "/ConfirmPage" component = {ConfirmPage}/>
+          <Route exact path = "/AboutTutor" component = {AboutTutor}/>
           <Route exact path="/">
             <Redirect to="/Home" />
           </Route>

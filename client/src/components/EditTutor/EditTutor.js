@@ -3,6 +3,7 @@ import "./EditTutor.css";
 import HomeButton from "../HomeButton/HomeButton"
 import EditPost from "../EditPost/EditPost"
 import React, { Component } from 'react'
+import userData from '../../userData';
 //import data from "../../data/tutors.js";
 
 export default class EditTutor extends Component {
@@ -12,12 +13,39 @@ export default class EditTutor extends Component {
         this.state = {
         name: "",
         email:"",
-        isSubmit: false
+        isSubmit: false,
         }
     }
     
     handleSubmit = (event) => {
-        this.setState({isSubmit:true});
+        //AXIOS call to fetch if entered email exists
+        //If email exists, set isSubmit to true
+
+        // userData.findTutorPost(this.state.email)
+        // .then((response) => {
+        //     {console.log(response)} 
+        //     if (response.data.error)
+        //     {
+
+        //         //Print error messages here
+        //         {console.log(response.data.error)}
+        //         {console.log("An error has occured in editTutor")}
+
+        //         this.setState({isSubmit:false})
+        //     }
+
+        //     else
+        //     {
+        //         {console.log("Email entered was found")}
+        //         {console.log(response.data)}
+        //         this.setState({
+        //             isSubmit:true
+        //         })
+        //     }
+        // })
+
+        this.setState({isSubmit:true})
+
     }
 
     render() {
