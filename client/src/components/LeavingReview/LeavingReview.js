@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import HomeButton from "../HomeButton/HomeButton"
 import FillReview from "../FillReview/FillReview"
+import userData from "../../userData"
+import axios from 'axios'
 
 export default class LeavingReview extends Component {
     state = {
@@ -12,9 +14,16 @@ export default class LeavingReview extends Component {
     }
     
     
-    handleSubmit = (event) => {
-        this.setState({isSubmit:true});
+    handleSubmit = async (event) => {
+        event.preventDefault();
+        const response = await axios.post('/tutors/find', {email:this.state.tutorEmail});
+        if(response.data.error){
+            alert("No tutor with that email");
+            this.setState({isSubmit: false});
+        }else{
+            this.setState({isSubmit:true});
         }
+    }
     
         render() {
             if (this.state.isSubmit) {

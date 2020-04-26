@@ -142,6 +142,7 @@ exports.read = async (req, res) => {
 };
 
 exports.delete = async (req, res) =>{
+    //Async waterfall find user first
     console.log(req.body);
     Tutor.updateOne({email: req.body.email}, {deleteConfirmed: true}, function(err, tut){
         if(err) res.status(200).send(err);
@@ -236,10 +237,10 @@ exports.update = (req, res) =>{
                     })
         
                     let site = (process.env.NODE_ENV === 'production') ? "https://uf-tutor-match.herokuapp.com" : "localhost:3000"
-                    let link = site + '/tutors/' + 'update/'+ req.body.tutorId;
+                    let link = site + '/tutors/' + 'update/'+ newUpdate.tutorId;
                     let mailOptions = {
                         from: '"UF Tutor Match" <donotreply@uftutormatch.com>',
-                        to: req.body.email,
+                        to: newUpdate.email,
                         subject: 'Update Tutor Post',
                         text: 'Thank you for using UF Tutor Post. Click on the link below to update your post.\n' + link,
                         html: '<p>Thank you for using UF Tutor Post. Click on the link below to update your post.</p><a href=' + link + '>Update Post</a>'

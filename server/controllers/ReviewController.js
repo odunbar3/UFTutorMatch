@@ -13,11 +13,12 @@ exports.list = (req, res) => {
 }
 
 exports.create = (req, res) =>{
+    console.log(req.body);
     const newReview = new Review({
         studentId: uniqid(),
-        studentName: req.body.name,
+        studentName: req.body.studentName,
         studentEmail: req.body.studentEmail,
-        review: req.body.review,
+        review: req.body.comments,
         rating: req.body.rating,
         tutorEmail: req.body.tutorEmail, 
         confirmed: false

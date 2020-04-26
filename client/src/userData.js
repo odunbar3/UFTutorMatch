@@ -19,7 +19,7 @@ userData.createTutorPost = async function(tutor){
     }
     console.log(tutorsPost);
     if(tutorsPost.data.errors){
-        response.errors = tutorsPost.data.errors;
+        response.errors = tutorsPost.errors;
     } else{
         response.created = true;
     }
@@ -80,7 +80,7 @@ userData.getReviews = async function(tutorEmail){
 };
 
 //Post review
-userData.activateUpdates = async function(review){
+userData.createReview = async function(review){
     const activeReview = await axios.post('/reviews/create', review);
 
     return activeReview;   
@@ -88,18 +88,10 @@ userData.activateUpdates = async function(review){
 
 
 //Activate review
-userData.activateUpdates = async function(studentId){
+userData.activateReview = async function(studentId){
     const review = await axios.put('/reviews/create/' + studentId);
 
     return review;   
 };
-
-//Search by class
-userData.searchClass = async function(searchClass){
-    const tutors = await axios.get('tutors/search', searchClass);
-
-    return tutors;
-};
-
 
 export default userData;

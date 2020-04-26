@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
 import HomeButton from "../HomeButton/HomeButton"
 import ConfirmPage from "../ConfirmPage/ConfirmPage"
+import userData from "../../userData"
 
 export default class FillReview extends Component {
     state = {
         rating: 0,
         thingsYouLiked:"",
         comments:"",
-        isSubmit: false
+        isSubmit: false,
+        studentEmail: this.props.filledOut.email,
+        studentName: this.props.filledOut.name,
+        tutorEmail: this.props.filledOut.tutorEmail
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
+        console.log(this.state);
+        await userData.createReview(this.state);
         this.setState({isSubmit:true})
     }
     
@@ -62,7 +68,7 @@ export default class FillReview extends Component {
                             </li>
                         </ul>
                         <label>
-                            <button className = "buttons" type="submit" value="Submit">Look Up</button>
+                            <button className = "buttons" type="submit" value="Submit">Review</button>
                         </label>
                     </form>
             </div>
