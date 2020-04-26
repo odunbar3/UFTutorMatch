@@ -24,8 +24,12 @@ export default class EditTutor extends Component {
 
         const response = await userData.findTutorPost(this.state);
         console.log(response);
-        this.props.updateTutor(response);
-        this.props.history.push('/EditPost');
+        if(response){
+            this.props.updateTutor(response);
+            this.props.history.push('/EditPost');
+        } else{
+            alert("No tutor found with that email");
+        }
 
         // userData.findTutorPost(this.state.email)
         // .then((response) => {
