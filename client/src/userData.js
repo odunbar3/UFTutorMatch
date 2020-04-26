@@ -29,8 +29,9 @@ userData.createTutorPost = async function(tutor){
 };
 
 //Activate post
-userData.activatePost = async function(tutorId){
-    const tutorsPost = await axios.put('/tutors/create/'+tutorId);
+userData.activatePost = async function(pathName){
+    const tutorsPost = await axios.put(pathName);
+    console.log(tutorsPost);
 
     return tutorsPost;
 };
@@ -52,8 +53,8 @@ userData.deleteTutorPost = async function(email){
 };
 
 //Fully delete the tutor post
-userData.activateDeletion = async function(tutorId){
-    const deletePost = await axios.delete('/tutors/delete/' + tutorId);
+userData.activateDeletion = async function(pathName){
+    const deletePost = await axios.delete(pathName);
 
     return deletePost;
 };
@@ -66,8 +67,8 @@ userData.updateTutorPost = async function(updates){
 };
 
 //Activate updates
-userData.activateUpdates = async function(tutorId){
-    const updatePost = await axios.put('/tutors/update/' + tutorId);
+userData.activateUpdates = async function(pathName){
+    const updatePost = await axios.put(pathName);
 
     return updatePost;   
 };
@@ -89,8 +90,8 @@ userData.createReview = async function(review){
 
 
 //Activate review
-userData.activateReview = async function(studentId){
-    const review = await axios.put('/reviews/create/' + studentId);
+userData.activateReview = async function(pathName){
+    const review = await axios.put(pathName);
 
     return review;   
 };
