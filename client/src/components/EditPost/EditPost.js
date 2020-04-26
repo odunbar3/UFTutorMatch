@@ -6,47 +6,47 @@ import userData from '../../userData';
 
 export default class EditPost extends Component {
 
-    info = this.props.filledOut
+    // info = this.props.filledOut
     constructor(props) {
         super(props);
             
         this.state = {
-        name:"Nope",
-        email:"",
-        availability:"",
-        price: "",
-        comments: "",
-        classes: [],
+        name: this.props.tutor.name,
+        email:this.props.tutor.email,
+        availability:this.props.tutor.availability,
+        price: this.props.tutor.price,
+        comments: this.props.tutor.comments,
+        classes: this.props.tutor.classes,
     
         isSubmit: false
     }
 }
-    componentWillMount()
-    {
-        //AXIOS call to get tutor object from this.props.filledOut.email and store in the state ^^
+    // componentWillMount()
+    // {
+    //     //AXIOS call to get tutor object from this.props.filledOut.email and store in the state ^^
 
 
-    //     var data = this.props.data
-    //     var email = this.props.filledOut.email
-    //     var tutor = data.filter(data => data.email === email)
-    //     if (tutor != null)
-    //     {
-    //         this.setState({
-    //             name: tutor.name,
-    //             email: tutor.email,
-    //             availability: tutor.availability,
-    //             price: tutor.price,
-    //             comments: tutor.comments,
-    //             classes: tutor.classes
-    //         },
-    //         () => {
-    //             console.log(this.state);
-    //         }
-    //         )
-    //     }
-    }
+    // //     var data = this.props.data
+    // //     var email = this.props.filledOut.email
+    // //     var tutor = data.filter(data => data.email === email)
+    // //     if (tutor != null)
+    // //     {
+    // //         this.setState({
+    // //             name: tutor.name,
+    // //             email: tutor.email,
+    // //             availability: tutor.availability,
+    // //             price: tutor.price,
+    // //             comments: tutor.comments,
+    // //             classes: tutor.classes
+    // //         },
+    // //         () => {
+    // //             console.log(this.state);
+    // //         }
+    // //         )
+    // //     }
+    // }
 
-    handleSubmit = (event) => {
+    updateTutor = async (event) => {
         event.preventDefault();
 
         //CODE TO CONSTRUCT EDIT TUTOR OBJECT HERE
@@ -62,24 +62,35 @@ export default class EditPost extends Component {
         }
 
         //AXIOS CALL TO PUT EDIT TUTOR HERE
+        const response = await userData.updateTutorPost(editedTutor);
+        console.log(response);
+        this.props.history.push("/ConfirmPage")
+        // this.setState({isSubmit:true});
+    }
 
-        this.setState({isSubmit:true});
+    deleteTutor = async (event) =>{
+        event.preventDefault();
+
+        const response = await userData.deleteTutorPost({email:this.state.email});
+        console.log(response);
+
+
     }
 
     render() {
-        if (this.state.isSubmit) {
-            return (
-                <ConfirmPage status = "updating" isWhat = "post"/>
-            )
-        }
+        // if (this.state.isSubmit) {
+        //     return (
+        //         <ConfirmPage status = "updating" isWhat = "post"/>
+        //     )
+        // }
 
         return (
             <div>
                 <HomeButton/>
 
-                <h1>Hello, {this.info.name}</h1>
+                <h1>Hello, {this.state.name}</h1>
                     
-                <form onSubmit={this.handleSubmit}>
+                <form>
                     <ul>
                         <li>
                             <label>
@@ -149,7 +160,8 @@ export default class EditPost extends Component {
                     </ul>
 
                     <label>
-                        <button className = "buttons" type="submit" value="Submit">Update</button>
+                        <button className = "buttons" type="button" onClick={this.updateTutor}>Update</button>
+                        <button className = "buttons" type="button" onClick={this.deleteTutor}>Delete</button>
                     </label>
 
                 </form>

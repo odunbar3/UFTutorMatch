@@ -17,9 +17,15 @@ export default class EditTutor extends Component {
         }
     }
     
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         //AXIOS call to fetch if entered email exists
         //If email exists, set isSubmit to true
+        event.preventDefault();
+
+        const response = await userData.findTutorPost(this.state);
+        console.log(response);
+        this.props.updateTutor(response);
+        this.props.history.push('/EditPost');
 
         // userData.findTutorPost(this.state.email)
         // .then((response) => {
@@ -44,22 +50,22 @@ export default class EditTutor extends Component {
         //     }
         // })
 
-        this.setState({isSubmit:true})
+        //this.setState({isSubmit:true})
 
     }
 
     render() {
 
-        if (this.state.isSubmit) {
-            return(
-            <EditPost 
-                filledOut = {this.state}
-                //data = {this.props.data}
-            />
-            )
-        }
+        // if (this.state.isSubmit) {
+        //     return(
+        //     <EditPost 
+        //         filledOut = {this.state}
+        //         //data = {this.props.data}
+        //     />
+        //     )
+        // }
 
-        else {
+        // else {
 
             return (
                 <div>
@@ -96,5 +102,5 @@ export default class EditTutor extends Component {
                 </div>
             )
         }
-    }
+    // }
 }

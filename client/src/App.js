@@ -9,6 +9,7 @@ import EditTutor from "./components/EditTutor/EditTutor";
 import ConfirmPage from "./components/ConfirmPage/ConfirmPage";
 import Home from "./views/Home/Home";
 import userData from "./userData";
+import EditPost from "./components/EditPost/EditPost";
 
 import AboutTutor from "./components/AboutTutor/AboutTutor"
 
@@ -73,14 +74,12 @@ class App extends Component {
                 updateData = {this.updateData.bind(this)} 
               />}
           />
-          <Route exact path = "/EditTutor"
-            component={() => 
-              <EditTutor 
-                data={this.state.data} 
-                updateData = {this.updateData.bind(this)} 
+          <Route exact path = "/EditTutor" render={props=><EditTutor {...props}
+                updateTutor={this.updateTutor} 
               />}
           />
           <Route exact path = "/ConfirmPage" component = {ConfirmPage}/>
+          <Route exact path ="/EditPost" render={props=><EditPost {...props} tutor={this.state.tutor}/>}/>
           <Route exact path = "/AboutTutor" render={props=><AboutTutor {...props} tutor = {this.state.tutor}/>}/>
           <Route exact path="/">
             <Redirect to="/Home" />

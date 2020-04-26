@@ -17,7 +17,7 @@ tutorsRouter.post('/create', tutors.create); //Create a tutor post
 /*
   The ':' specifies a URL parameter. 
  */
-tutorsRouter.get('/find', tutors.read); //Read tutor post
+tutorsRouter.post('/find', tutors.read); //Read tutor post
 tutorsRouter.put('/create/:id', tutors.postTutor) //Activates post
 tutorsRouter.put('/delete', tutors.delete) //Set post up to be deleted => send back tutorId and email
 tutorsRouter.delete('/delete/:id', tutors.deletePost) //Actually delete post (from link sent to user)

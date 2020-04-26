@@ -17,12 +17,14 @@ userData.createTutorPost = async function(tutor){
         errors: "",
         created: false,
     }
-    if(tutorsPost.errors){
-        response.errors = tutorsPost.errors;
+    console.log(tutorsPost);
+    if(tutorsPost.data.errors){
+        response.errors = tutorsPost.data.errors;
     } else{
         response.created = true;
     }
 
+    console.log(response);
     return response;
 };
 
@@ -35,9 +37,11 @@ userData.activatePost = async function(tutorId){
 
 //Find Tutor Post
 userData.findTutorPost = async function(email){
-    const response = await axios.get('/tutors/find', email);
+    console.log(email);
+    const response = await axios.post('/tutors/find', {email:email.email});
+    console.log(response);
 
-    return response.tutor;
+    return response.data.tutor;
 };
 
 //Delete Tutor post
@@ -70,7 +74,7 @@ userData.activateUpdates = async function(tutorId){
 
 //List reviews
 userData.getReviews = async function(tutorEmail){
-    const reviews = await axios.get('/reviews/list');
+    const reviews = await axios.get('/reviews/list', tutorEmail);
 
     return reviews;
 };
