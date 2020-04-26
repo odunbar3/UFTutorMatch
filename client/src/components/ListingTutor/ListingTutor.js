@@ -15,7 +15,7 @@ export default class ListingTutor extends Component {
             
         this.state = {
         typedClass: " ",
-        clickedOn: false,
+        // clickedOn: false,
         tutorList : this.props.data,
         classList: this.props.data,
         tutor:{}
@@ -23,19 +23,19 @@ export default class ListingTutor extends Component {
         }
     }
 
-    componentDidMount() {
+    // componentDidMount() {
 
-        // this.getTutors();
-        userData.getTutors()
-        .then((response)=>{
-            let tutorArray = [];
-            response.forEach((element)=>{
-                tutorArray.push(element);
-            });
-            this.setState({tutorList: tutorArray});
-        })
+    //     // this.getTutors();
+    //     userData.getTutors()
+    //     .then((response)=>{
+    //         let tutorArray = [];
+    //         response.forEach((element)=>{
+    //             tutorArray.push(element);
+    //         });
+    //         this.setState({tutorList: tutorArray});
+    //     })
 
-    }
+    // }
 
 
 
@@ -54,52 +54,36 @@ export default class ListingTutor extends Component {
     // }
 
 
-        clickedOn = (theEmail) => {
-            this.setState({clickedOn:true})
+    clickedOn = (element) => {
+        console.log(element.email);
+        // this.setState({clickedOn:true})
+        // this.props.updateTutorEmail(theEmail);
+        //this.props.history.push('/Tutor');
+    }
 
-        }
+    onClassChange = async (event) =>{
 
-        onClassChange = async (event) =>{
-
-            this.setState({typedClass: event.target.value})
-            console.log(typeof this.state.tutorList);
-            console.log(event.target.value)
-            let array = await this.state.tutorList.filter(function(item){
-                console.log(typeof item.classes[0]);
-                console.log(item);
-                console.log(item.classes);
-                let isValid = false;
-                item.classes.forEach((oneClass) =>{
-                    console.log(oneClass);
-                    
-                    if(oneClass.includes(event.target.value)){
-                        isValid = true;
-                        return isValid;
-                    }
-                })
-                return isValid;
+        this.setState({typedClass: event.target.value})
+        let array = [];
+        array = await this.state.tutorList.filter(function(item){
+            let isValid = false;
+            item.classes.forEach((oneClass) =>{
+                if(oneClass.includes(event.target.value)){
+                    isValid = true;
+                    return isValid;
+                }
             })
-            console.log(array);
+            return isValid;
+        })
 
-            this.setState({classList : array});
-        
-        // this.state.classList.filter(classes => {
-        //     var test = classes.classes.filter(function(classi) {
-        //         return classi.toLowerCase().indexOf(typedClass.toLowerCase()) >= 0
-        //     });
-        //     var isValid = false
-        //     if (test[0])
-        //     {
-        //         isValid = true
-        //     }
-        //     return isValid;
-        // });
-        }
+        this.setState({classList : array});
+    }
 
     renderTutor = (element) => {
 
             
             return(
+                <button onClick={this.clickedOn.bind(this,element)}>
                 <li key ={element.email}>
                     {console.log(element.name)}
                     <ul>
@@ -109,6 +93,7 @@ export default class ListingTutor extends Component {
                      </ul>
 
                 </li>
+                </button>
             )
     //     this.state.tutorsList.map(tutor => {
     //     // {console.log(classList)}
@@ -145,7 +130,7 @@ export default class ListingTutor extends Component {
                         onChange={this.onClassChange}
                         />
                         </label>
-                {console.log(this.state.tutorList)}
+                {console.log(this.state.classList)}
                 {this.state.classList.map((element)=> {return this.renderTutor(element)})}
             </div>
         )

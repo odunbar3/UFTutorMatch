@@ -36,9 +36,9 @@ userData.activatePost = async function(tutorId){
 
 //Find Tutor Post
 userData.findTutorPost = async function(email){
-    const tutor = await axios.get('/tutors/find', email);
+    const response = await axios.get('/tutors/find', email);
 
-    return tutor;
+    return response.tutor;
 };
 
 //Delete Tutor post

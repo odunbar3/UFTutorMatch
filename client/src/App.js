@@ -17,12 +17,18 @@ class App extends Component {
     super(props);
     
     this.state = {
-      data: []
+      data: [],
+      tutorEmail: ""
     }
   }
 
   updateData = () => {
     this.setState({ data:userData.getTutors() });
+  }
+
+  updateTutorEmail = (email)=>{
+    this.setState({tutorEmail: email});
+    console.log(this.state.tutorEmail);
   }
 
   componentDidMount() {
@@ -48,11 +54,13 @@ class App extends Component {
         <Switch>
           <Route exact path="/Home" component={Home} />
           <Route exact path="/Student" component = {Student}/>
-          <Route exact path = "/Tutor" component = {Tutor}/>
+          <Route exact path = "/Tutor" component = {() =><Tutor tutorEmail={this.state.tutorEmail}/>}/>
           <Route exact path = "/ListingTutor" 
             component={() => 
             <ListingTutor 
-              data={this.state.data} 
+              data={this.state.data}
+              tutorEmail = {this.state.tutorEmail}
+              updateTutorEmail={this.updateTutorEmail} 
             />}
           />
           <Route exact path = "/LeavingReview" component = {LeavingReview}/>
