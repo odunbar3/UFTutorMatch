@@ -11,7 +11,7 @@ const reviewRouter = express.Router();
   Note: the tutors variable above and the file it is connected to help you trace
  */
 
-reviewRouter.get('/list', reviews.list); //Get list of tutor's reviews
+reviewRouter.post('/list', reviews.list); //Get list of tutor's reviews
 reviewRouter.post('/create', reviews.create); //Create a review
 
 /*

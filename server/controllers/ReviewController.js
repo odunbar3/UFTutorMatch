@@ -6,9 +6,10 @@ const async = require('async');
 const Tutor = require('../models/TutorModel')
 
 exports.list = (req, res) => {
+    console.log(req.body);
     Review.find({tutorEmail: req.body.tutorEmail, confirmed: true}, function(err, revs){
         if(err) res.status(200).send(err);
-        else res.status(200).send(revs);
+        else res.status(200).json({revs: revs});
     })
 }
 

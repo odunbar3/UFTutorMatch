@@ -74,9 +74,10 @@ userData.activateUpdates = async function(tutorId){
 
 //List reviews
 userData.getReviews = async function(tutorEmail){
-    const reviews = await axios.get('/reviews/list', tutorEmail);
-
-    return reviews;
+    console.log(tutorEmail);
+    const reviews = await axios.post('/reviews/list', tutorEmail);
+    console.log(reviews)
+    return reviews.data.revs;
 };
 
 //Post review

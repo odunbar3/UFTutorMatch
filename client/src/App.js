@@ -37,6 +37,9 @@ class App extends Component {
   updateTutor = async (tutor)=>{
     await this.setState({tutor: tutor});
     console.log(this.state.tutor);
+    const revs = await userData.getReviews({tutorEmail: this.state.tutor.email});
+    this.setState({reviews: revs});
+    console.log(this.state.reviews);
   }
 
   updateConfirmation = async(status, isWhat) =>{
