@@ -1,5 +1,5 @@
 const tutors = require('../controllers/TutorController');
-const config = require('../config/config.js')
+// const config = require('../config/config.js')
 const express = require('express')
 const mongoose = require('mongoose')
 const tutorsRouter = express.Router();
