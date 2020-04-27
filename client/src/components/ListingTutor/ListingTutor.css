@@ -50,9 +50,13 @@ Link{
 
 .clickOns {
     margin:15px;
+    text-align: center;
+    font-size:25px;
+    height:300px;
+    width:300px;
 }
 
-.bullet{
+/* .bullet{
     
-}
+} */
 
