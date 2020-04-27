@@ -29,7 +29,7 @@ export default class AboutTutor extends Component {
        <li> <label>Name: {this.state.name}</label></li> 
        <li>  <label>Email: {this.state.email}</label></li> 
        <li>  <label>Availability: {this.state.availability}</label></li> 
-       <li>  <label>Price: {this.state.price}/hr</label></li> 
+       <li>  <label>Price: ${this.state.price}/hr</label></li> 
        <li>  <label>Classes: {this.state.classes}</label></li> 
        <li>  <label>Comments: {this.state.comments}</label></li> 
         </ul>
