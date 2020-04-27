@@ -31,8 +31,9 @@ ul {
     margin:none;
 }
 
-li {
+.tutors {
     margin:calc(5px + 2vmin);
+    color: #103681;
 }
 
 body {
@@ -46,3 +47,12 @@ label {
 Link{
     text-decoration:none;
 }
+
+.clickOns {
+    margin:15px;
+}
+
+.bullet{
+    
+}
+

@@ -82,9 +82,10 @@ render(){
             <form onSubmit={this.handleSubmit}>
                 <ul>
                     <li>
-                        <label>
+                        <label >
                             Name:
-                            <input type="text"
+                            <input className = "inputs"
+                            type="text"
                             placeholder="First and Last"
                             value={this.state.name} 
                             onChange={event => this.setState({name: event.target.value})}
@@ -93,9 +94,10 @@ render(){
                         </label>
                     </li>
                     <li>
-                        <label>
-                            Email:
-                            <input type="text"
+                        <label >
+                            Email:   
+                            <input className = "inputs"
+                            type="text"
                             placeholder="example@email.com"
                             value={this.state.email} 
                             onChange={event => this.setState({email: event.target.value})} 
