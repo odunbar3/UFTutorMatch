@@ -38,3 +38,7 @@ input{
 body{
     background-color: #103681;
 }
+
+.inputs{
+    margin-left:calc(20px+2vmin);
+}
