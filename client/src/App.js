@@ -100,7 +100,7 @@ class App extends Component {
           />
           <Route exact path = "/ConfirmPage" render={props=><ConfirmPage isWhat={this.state.confirmation.isWhat} status={this.state.confirmation.status}/>}/>
           <Route exact path ="/EditPost" render={props=><EditPost {...props} tutor={this.state.tutor} confirmation ={this.state.confirmation} updateConfirmation={this.updateConfirmation}/>}/>
-          <Route exact path = "/AboutTutor" render={props=><AboutTutor {...props} tutor = {this.state.tutor}/>}/>
+          <Route exact path = "/AboutTutor" render={props=><AboutTutor {...props} tutor = {this.state.tutor} reviews={this.state.reviews}/>}/>
           <Route path="/tutors/create/:id" render={props=><ActivationPage {...props} updateData={this.updateData}/>}/>
           <Route path="/tutors/update/:id" render={props=><UpdateActivation {...props} updateData={this.updateData}/>}/>
           <Route path="/tutors/delete/:id" render={props=><DeleteActivation {...props} updateData={this.updateData}/>}/>

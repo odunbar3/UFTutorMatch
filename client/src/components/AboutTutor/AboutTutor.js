@@ -14,6 +14,22 @@ export default class AboutTutor extends Component {
         comments:this.props.tutor.comments
     }
 
+    renderReview = (element) => {
+
+            
+        return(
+            <div className = "review" key ={element.studentEmail}>
+            {/* <ul > */}
+                {console.log(element)}
+                    <p className  = "tutors" >{element.studentName}</p>
+                    <p className  = "tutors" >Rating: {element.rating}</p>
+                    <p className  = "tutors" >{element.review}</p>  {/*TODO: RENDER LIST OF CLASSES */}
+
+            {/* </ul> */}
+            </div>
+        )
+    }
+
     // componentWillMount() {
     //     //AXIOS CALL to find tutor with this.props.tutorEmail and store info in state above^^
 
@@ -26,13 +42,15 @@ export default class AboutTutor extends Component {
                 <ul className = "theList">
                     
 
-       <li> <label>Name: {this.state.name}</label></li> 
-       <li>  <label>Email: {this.state.email}</label></li> 
-       <li>  <label>Availability: {this.state.availability}</label></li> 
-       <li>  <label>Price: ${this.state.price}/hr</label></li> 
-       <li>  <label>Classes: {this.state.classes}</label></li> 
-       <li>  <label>Comments: {this.state.comments}</label></li> 
-        </ul>
+                    <li> <label>Name: {this.state.name}</label></li> 
+                    <li>  <label>Email: {this.state.email}</label></li> 
+                    <li>  <label>Availability: {this.state.availability}</label></li> 
+                    <li>  <label>Price: ${this.state.price}/hr</label></li> 
+                    <li>  <label>Classes: {this.state.classes}</label></li> 
+                    <li>  <label>Comments: {this.state.comments}</label></li> 
+                </ul>
+                <label>Reviews</label>
+                {this.props.reviews.map((element)=> {return this.renderReview(element)})}
             </div>
         )
     }
