@@ -86,15 +86,13 @@ export default class ListingTutor extends Component {
             
             return(
                 <button className = "clickOns" onClick={this.clickedOn.bind(this,element)}>
-                <li className = "bullet" key ={element.email}>
+                <ul className = "bullet" key ={element.email}>
                     {console.log(element.name)}
-                    <ul>
                         <li className  = "tutors" >{element.name}</li>
                         <li className  = "tutors" >${element.price}/hr</li>
                         <li className  = "tutors" >{element.classes}</li>  {/*TODO: RENDER LIST OF CLASSES */}
-                     </ul>
 
-                </li>
+                </ul>
                 </button>
             )
     //     this.state.tutorsList.map(tutor => {
