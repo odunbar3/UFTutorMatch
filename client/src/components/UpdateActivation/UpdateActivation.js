@@ -6,7 +6,18 @@ import userData from "../../userData"
 export default class UpdateActivation extends Component {
     componentDidMount(){
         console.log(this.props.location.pathname);
-        userData.activateUpdates(this.props.location.pathname);
+        userData.activateUpdates(this.props.location.pathname).then(()=>{
+            userData.getTutors()
+            .then((response)=>{
+            let tutorArray = [];
+            response.forEach((element)=>{
+                tutorArray.push(element);
+            });
+            console.log(tutorArray);
+            this.props.updateData(tutorArray);
+        })
+        })
+        
 
     }
     render() {

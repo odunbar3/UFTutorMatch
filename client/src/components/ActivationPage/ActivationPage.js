@@ -7,6 +7,14 @@ export default class ActivationPage extends Component {
     componentDidMount(){
         console.log(this.props.location.pathname);
         userData.activatePost(this.props.location.pathname);
+        userData.getTutors()
+        .then((response)=>{
+        let tutorArray = [];
+        response.forEach((element)=>{
+            tutorArray.push(element);
+        });
+        this.props.updateData(tutorArray);
+    })
 
     }
     render() {

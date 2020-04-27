@@ -34,8 +34,8 @@ class App extends Component {
     }
   }
 
-  updateData = () => {
-    this.setState({ data:userData.getTutors() });
+  updateData = async (data) => {
+    await this.setState({ data:data });
   }
 
   updateTutor = async (tutor)=>{
@@ -101,9 +101,9 @@ class App extends Component {
           <Route exact path = "/ConfirmPage" render={props=><ConfirmPage isWhat={this.state.confirmation.isWhat} status={this.state.confirmation.status}/>}/>
           <Route exact path ="/EditPost" render={props=><EditPost {...props} tutor={this.state.tutor} confirmation ={this.state.confirmation} updateConfirmation={this.updateConfirmation}/>}/>
           <Route exact path = "/AboutTutor" render={props=><AboutTutor {...props} tutor = {this.state.tutor}/>}/>
-          <Route path="/tutors/create/:id" component={ActivationPage}/>
-          <Route path="/tutors/update/:id" component={UpdateActivation}/>
-          <Route path="/tutors/delete/:id" component={DeleteActivation}/>
+          <Route path="/tutors/create/:id" render={props=><ActivationPage {...props} updateData={this.updateData}/>}/>
+          <Route path="/tutors/update/:id" render={props=><UpdateActivation {...props} updateData={this.updateData}/>}/>
+          <Route path="/tutors/delete/:id" render={props=><DeleteActivation {...props} updateData={this.updateData}/>}/>
           <Route path="/reviews/create/:id" component={ReviewActivation}/>
           <Route exact path="/">
             <Redirect to="/Home" />
