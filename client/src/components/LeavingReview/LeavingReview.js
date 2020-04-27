@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import HomeButton from "../HomeButton/HomeButton"
 import FillReview from "../FillReview/FillReview"
 import userData from "../../userData"
+import "./LeavingReview.css"
 import axios from 'axios'
 
 export default class LeavingReview extends Component {
