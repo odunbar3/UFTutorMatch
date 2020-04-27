@@ -1,5 +1,5 @@
 const reviews = require('../controllers/ReviewController');
-const config = require('../config/config.js')
+//const config = require('../config/config.js')
 const express = require('express')
 const mongoose = require('mongoose')
 const reviewRouter = express.Router();

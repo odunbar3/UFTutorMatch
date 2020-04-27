@@ -123,12 +123,13 @@ export default class ListingTutor extends Component {
             <div>
                 <HomeButton/>
                 <label>
-                    Search by Class:
-                <input type="text"
-                        placeholder = "Class Code"
-                        onChange={this.onClassChange}
-                        />
-                        </label>
+                Search by Class
+                    <input type="text"
+                            placeholder = "Class Code"
+                            className = "defaultsearch"
+                            onChange={this.onClassChange}
+                    />
+                </label>
                 {console.log(this.state.classList)}
                 {this.state.classList.map((element)=> {return this.renderTutor(element)})}
             </div>
