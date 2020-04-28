@@ -118,7 +118,7 @@ render(){
                     </li>
                     <li>
                         <label>
-                            Price:
+                            Price (per hour):
                             <input type="text"
                             placeholder="$"
                             value={this.state.price} 
@@ -140,7 +140,7 @@ render(){
                     </li>
                     <li>
                         <label>
-                            Comments:
+                            Comments (optional):
                             <input type="text"
                             placeholder="Extra info for students"
                             value={this.state.comments} 
